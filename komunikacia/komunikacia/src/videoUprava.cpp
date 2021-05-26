@@ -105,23 +105,23 @@ void text_pohyb_set(const std_msgs::String::ConstPtr& msg)
 
 	
  	
- 	putText(cv_ptr->image, "Bakalarsky projekt", cv::Point(445,30), cv::FONT_HERSHEY_DUPLEX, 1.2, cv::Scalar(0,143,0), 1.8);
- 	cv::circle(cv_ptr->image, cv::Point(1245, 93), 4, CV_RGB(0,143,0));
+ 	putText(cv_ptr->image, "Bakalarsky projekt", cv::Point(445,30), cv::FONT_HERSHEY_DUPLEX, 1.2, cv::Scalar(0,200,0), 1.8);
+ 	cv::circle(cv_ptr->image, cv::Point(1245, 93), 4, CV_RGB(0,200,0));
         
         if (vzdialenost_podhranicou==true)
-        	putText(cv_ptr->image, text_vzdialenost, cv::Point(5,50), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,0,143), 1.8);
+        	putText(cv_ptr->image, text_vzdialenost, cv::Point(5,50), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,0,200), 1.8);
         else
-        	putText(cv_ptr->image, text_vzdialenost, cv::Point(5,50), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,143,0), 1.8);
+        	putText(cv_ptr->image, text_vzdialenost, cv::Point(5,50), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,200,0), 1.8);
         
         
         
-        putText(cv_ptr->image, text_svetlo, cv::Point(920,50), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,143,0), 1.8);
-        putText(cv_ptr->image, text_zvuk, cv::Point(920,80), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,143,0), 1.8);
-        putText(cv_ptr->image, text_teplota, cv::Point(990,110), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,143,0), 1.8);
+        putText(cv_ptr->image, text_svetlo, cv::Point(920,50), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,200,0), 1.8);
+        putText(cv_ptr->image, text_zvuk, cv::Point(920,80), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,200,0), 1.8);
+        putText(cv_ptr->image, text_teplota, cv::Point(990,110), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,200,0), 1.8);
         
-        putText(cv_ptr->image, text_pasL, cv::Point(5,950), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,143,0), 1.8);
-        putText(cv_ptr->image, text_pasP, cv::Point(850,950), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,143,0), 1.8);
-        putText(cv_ptr->image, text_pohyb, cv::Point(500,950), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,143,0), 1.8);
+        putText(cv_ptr->image, text_pasL, cv::Point(5,950), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,200,0), 1.8);
+        putText(cv_ptr->image, text_pasP, cv::Point(830,950), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,200,0), 1.8);
+        putText(cv_ptr->image, text_pohyb, cv::Point(535,950), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,200,0), 1.8);
        //putText(cv_ptr->image, "Pokus2", cv::Point(5,55), cv::FONT_HERSHEY_DUPLEX, 1, cv::Scalar(0,0,200), 2);
        
        cv::resize(cv_ptr->image, cv_ptr->image, cv::Size(cv_ptr->image.cols * 0.9,cv_ptr->image.rows * 0.9), 0, 0, CV_INTER_LINEAR);
