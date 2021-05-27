@@ -32,7 +32,7 @@ class videoUprava_node
    char text_pasP[30];
    char text_pohyb[30];
    bool vzdialenost_podhranicou;
-   int vzdialenost_dov=40; //40 cm
+   const int vzdialenost_dov=40; //40 cm
    
    public:
      videoUprava_node()
