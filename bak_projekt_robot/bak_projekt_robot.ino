@@ -85,27 +85,27 @@ void isr_process_encoder2(void) // count the ticks - i.e. how far the motor has 
   }
 }
 
-//Set up the ros node and publisher
+void messageCb( const geometry_msgs::Twist& pohyb)
+  {
+    
+  ledky( 0, 0, 80); // red, green,blue
+  pasy(pohyb);   // vykona pohyb
+  ledky( 0, 0, 0);
+    
+  }
+
+//Set up the ros node publisher and subscriber
 
 ros::Publisher pub_temp("data_senzorov", &senzor_DATA); 
 ros::Publisher pub_pasy("pasy_rychlost", &rychlost_PASOV);
 ros::Publisher pub_pohyb("pohyb_stav", &stav);
+ros::Subscriber<geometry_msgs::Twist> sub("turtle1/cmd_vel", &messageCb );
       
-    ros::NodeHandle nh;
+ros::NodeHandle nh;
    
-   void messageCb( const geometry_msgs::Twist& pohyb){
-    
-     ledky( 0, 0, 80); // red, green,blue
-     pasy(pohyb);   // vykona pohyb
-     ledky( 0, 0, 0);
-    
-   }
-   
-   ros::Subscriber<geometry_msgs::Twist> sub("turtle1/cmd_vel", &messageCb );
    
    void setup()
    {
-     //pinMode(13, OUTPUT);
      led.setpin( 44 );
        //Set PWM 8KHz
     // Serial.begin(115200);
@@ -114,17 +114,6 @@ ros::Publisher pub_pohyb("pohyb_stav", &stav);
      TCCR1B = _BV(CS11) | _BV(WGM12);
      TCCR2A = _BV(WGM21) | _BV(WGM20);
      TCCR2B = _BV(CS21);
-
-
-       // Encoder_1.setPulse(9);
-      //  Encoder_2.setPulse(9);
-       // Encoder_1.setRatio(39.267);
-      //  Encoder_2.setRatio(39.267);
-       // Encoder_1.setPosPid(1.8,0,1.2);
-      //  Encoder_2.setPosPid(1.8,0,1.2);
-      //  Encoder_1.setSpeedPid(0.18,0,0);
-       // Encoder_2.setSpeedPid(0.18,0,0);
-
 
      attachInterrupt(Encoder_1.getIntNum(), isr_process_encoder1, RISING); 
      attachInterrupt(Encoder_2.getIntNum(), isr_process_encoder2, RISING);
@@ -139,16 +128,16 @@ ros::Publisher pub_pohyb("pohyb_stav", &stav);
      
      buzzer.setpin(BUZZER_PORT);
      buzzer.noTone();
-     buzzer.tone(523, 200);   //bzuciak 600Hz, 1000ms
+     buzzer.tone(523, 200);   //bzuciak 523Hz, 200ms
      delay(100);
      //buzzer.noTone();             
      buzzer.tone(523, 200);
      
    }
+   
 
        unsigned long cas_pred=0;
        const long interval= 1000;
-
 
    void loop()
    { 
@@ -164,7 +153,6 @@ ros::Publisher pub_pohyb("pohyb_stav", &stav);
         
         if (senzor_DATA.vzdialenost<40)
         buzzer.tone(1244, 50);
-       // else delay(20);
     
         pub_temp.publish(&senzor_DATA);
 
@@ -172,8 +160,7 @@ ros::Publisher pub_pohyb("pohyb_stav", &stav);
         Stop() ;
         pub_pohyb.publish(&stav);
     } 
-  //else delay(20);
-       
+
      nh.spinOnce(); 
     
    }
@@ -214,11 +201,16 @@ ros::Publisher pub_pohyb("pohyb_stav", &stav);
     pub_pohyb.publish(&stav);
     
     zisti_rychlost();
-    delay(200);
+    delay(100);
     zisti_rychlost();
-    delay(200);
+    delay(100);
     zisti_rychlost(); 
-    delay(100);  
+    delay(100); 
+    zisti_rychlost(); 
+    delay(100);
+    zisti_rychlost(); 
+    delay(100); 
+    zisti_rychlost(); 
     Stop() ;
     pub_pohyb.publish(&stav);
    } 
